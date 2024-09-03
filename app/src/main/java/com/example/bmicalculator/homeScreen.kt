@@ -37,13 +37,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.bmicalculator.ui.theme.interBold
 import com.example.bmicalculator.ui.theme.interMedium
 import com.example.bmicalculator.ui.theme.interRegular
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreenContent() {
+fun HomeScreenContent(navController: NavController) {
     Scaffold(
         containerColor = Color(0xfff4f5ff),
         topBar = {
@@ -88,7 +89,9 @@ fun HomeScreenContent() {
                 modifier = Modifier
                     .height(75.dp)
                     .fillMaxWidth(),
-                onClick = {}) {
+                onClick = {
+                    navController.navigate("ResultScreen")
+                }) {
                 Text(
                     text = "Calculate BMI",
                     style = TextStyle(

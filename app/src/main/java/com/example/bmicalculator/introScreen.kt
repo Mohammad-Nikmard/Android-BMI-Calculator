@@ -22,6 +22,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.bmicalculator.ui.theme.interBold
 import com.example.bmicalculator.ui.theme.interExtraBoldItalic
 import com.example.bmicalculator.ui.theme.interMedium
@@ -29,7 +30,7 @@ import com.example.bmicalculator.ui.theme.interRegular
 
 
 @Composable
-fun IntroScreenContent() {
+fun IntroScreenContent(navController: NavController) {
     Scaffold(containerColor = Color(0xff6C63FF)) { contentPadding ->
         Column(
             modifier = Modifier
@@ -90,7 +91,9 @@ fun IntroScreenContent() {
                 modifier = Modifier
                     .height(75.dp)
                     .fillMaxWidth(),
-                onClick = {}) {
+                onClick = {
+                    navController.navigate("HomeScreen")
+                }) {
                 Text(
                     "Get Started",
                     style = TextStyle(

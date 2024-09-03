@@ -25,13 +25,14 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.bmicalculator.ui.theme.interBold
 import com.example.bmicalculator.ui.theme.interMedium
 import com.example.bmicalculator.ui.theme.interRegular
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ResultScreenContent() {
+fun ResultScreenContent(navController: NavController) {
     Scaffold(
         containerColor = Color(0xfff4f3ff),
         topBar = {
@@ -147,7 +148,11 @@ fun ResultScreenContent() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(75.dp),
-                onClick = {}) {
+                onClick = {
+                    navController.navigate("HomeScreen"){
+                        popUpTo("ResultScreen"){inclusive = true}
+                    }
+                }) {
                 Text(
                     "Calculate Again", style = TextStyle(
                         fontSize = 17.sp, color = Color.White, fontFamily = interMedium,
