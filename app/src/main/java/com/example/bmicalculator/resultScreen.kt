@@ -32,7 +32,7 @@ import com.example.bmicalculator.ui.theme.interRegular
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ResultScreenContent(navController: NavController) {
+fun ResultScreenContent(navController: NavController,bmiValue : Float, maleGender: Boolean) {
     Scaffold(
         containerColor = Color(0xfff4f3ff),
         topBar = {
@@ -101,7 +101,7 @@ fun ResultScreenContent(navController: NavController) {
 
                     Row(verticalAlignment = Alignment.Bottom) {
                         Text(
-                            "22",
+                            bmiValue.toDouble().toString().substring(0,2),
                             style = TextStyle(
                                 fontFamily = interBold,
                                 fontSize = 140.sp,
@@ -109,7 +109,7 @@ fun ResultScreenContent(navController: NavController) {
                             ),
                         )
                         Text(
-                            ".54",
+                            ". ${bmiValue.toString().substring(3, 5)}",
                             modifier = Modifier.padding(bottom = 25.dp),
                             style = TextStyle(
                                 fontFamily = interMedium,
@@ -129,7 +129,7 @@ fun ResultScreenContent(navController: NavController) {
                     Spacer(modifier = Modifier.height(18.dp))
 
                     Text(
-                        "Underweight: BMI less that 18.5 Normal weight: BMI 18.5 to 24.9 Overweight: BMI 25 to 29.9 Obesity: 30 to 40",
+                        bmiResultText(isMale = maleGender, bmiResult = bmiValue),
                         modifier = Modifier.padding(horizontal = 60.dp),
                         style = TextStyle(
                             fontSize = 13.sp, color = Color(0xff081854), fontFamily = interMedium,

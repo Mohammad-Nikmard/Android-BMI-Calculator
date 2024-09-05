@@ -11,9 +11,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.bmicalculator.ui.theme.BMICalculatorTheme
 
 class MainActivity : ComponentActivity() {
@@ -42,8 +44,14 @@ fun AppNavigation(){
             HomeScreenContent(navController)
         }
 
-        composable(route = "ResultScreen"){
-            ResultScreenContent(navController)
+        composable(route = "ResultScreen/{bmiValue}/{maleGender}", arguments = listOf(
+            navArgument(name = "bmiValue") {type = NavType.FloatType},
+            navArgument(name = "maleGender"){type = NavType.BoolType}
+        )){
+            stackEntry ->
+            val bmiValue = stackEntry.arguments?.getFloat("bmiValue")
+            val maleGender = stackEntry.arguments?.getBoolean("maleGender")
+            ResultScreenContent(navController, bmiValue = bmiValue!! , maleGender = maleGender!!)
         }
 
     }

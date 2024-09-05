@@ -64,6 +64,7 @@ import androidx.navigation.NavController
 import com.example.bmicalculator.ui.theme.interBold
 import com.example.bmicalculator.ui.theme.interMedium
 import com.example.bmicalculator.ui.theme.interRegular
+import kotlin.math.roundToInt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -80,7 +81,7 @@ fun HomeScreenContent(navController: NavController) {
         mutableStateOf(50f)
     }
 
-    var genereSection by remember {
+    var maleGender by remember {
         mutableStateOf(false)
     }
 
@@ -126,7 +127,7 @@ fun HomeScreenContent(navController: NavController) {
 
             GenderSection(
                 onGenderChnage = { value ->
-                    genereSection = value
+                    maleGender = value
                 },
             )
 
@@ -140,7 +141,8 @@ fun HomeScreenContent(navController: NavController) {
                     .height(75.dp)
                     .fillMaxWidth(),
                 onClick = {
-                    navController.navigate("ResultScreen")
+                    val  bmiValue : Float = weightNumber / ((heightAmount * heightAmount) / 10000)
+                    navController.navigate("ResultScreen/$bmiValue/${!maleGender}")
                 }) {
                 Text(
                     text = "Calculate BMI",
@@ -369,7 +371,7 @@ private fun HeightSection(onHeightChanged: (Float) -> Unit) {
                 ),
             )
             Text(
-                "175",
+                heightMetrick.roundToInt().toString(),
                 style = TextStyle(
                     fontSize = 57.sp, fontFamily = interBold, color = Color(0xff6C63FF),
                 ),
